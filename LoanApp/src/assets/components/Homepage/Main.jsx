@@ -1,7 +1,8 @@
+import { MainDiv } from "../Styled/Styled";
 const Main =()=>{
     return (
         <>
-        Main
+        <MainDiv></MainDiv>
         </>
     )
 }
