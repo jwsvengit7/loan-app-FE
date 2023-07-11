@@ -2,7 +2,8 @@ import { MainDiv,
     MainContent,
     BoxALL,
     ALLBox,
-
+    ALLBoxContent,
+    Number,
     LevelRol, 
     AboutUs,
     Content1,
@@ -152,19 +153,60 @@ const Main =()=>{
                     aliquam amet eum dolore, error fugiat, tempora dignissimos nesciunt totam corporis iure quod necessitatibus dolores! lorem
                     </p>
                     <BoxALL>
+                    <ALLBox>
+                            <Number>
+                                3
+                            </Number>
+                            <ALLBoxContent>
+                                <p>Lorem ipsum dolor, sit amet 
+                                consectetur adipisicing elitne
+                                consectetur adipisicing elitne
+                                </p>
+
+                            </ALLBoxContent>
+                            
+                        </ALLBox>
                         <ALLBox>
+                            <Number>
+                                3
+                            </Number>
+                            <ALLBoxContent>
+                                <p>Lorem ipsum dolor, sit amet 
+                                consectetur adipisicing elitne
+                                consectetur adipisicing elitne
+                                </p>
+
+                            </ALLBoxContent>
                             
                         </ALLBox>
-                           <ALLBox>
+                        <ALLBox>
+                            <Number>
+                                3
+                            </Number>
+                            <ALLBoxContent>
+                                <p>Lorem ipsum dolor, sit amet 
+                                consectetur adipisicing elitne
+                                consectetur adipisicing elitne
+                                </p>
+
+                            </ALLBoxContent>
                             
                         </ALLBox>
-                           <ALLBox>
+                        <ALLBox>
+                            <Number>
+                                3
+                            </Number>
+                            <ALLBoxContent>
+                                <p>Lorem ipsum dolor, sit amet 
+                                consectetur adipisicing elitne
+                                consectetur adipisicing elitne
+                                </p>
+
+                            </ALLBoxContent>
                             
                         </ALLBox>
-                           <ALLBox>
-                            
-                        </ALLBox>
-                    </BoxALL>
+                        </BoxALL>
+                          
 
                    </BlueDiv>
             </MainContent>

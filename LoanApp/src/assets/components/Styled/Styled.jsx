@@ -317,7 +317,29 @@ flex-wrap:wrap
 export const ALLBox =styled.div`
 width:400px;
 height:100px;
-background:green;
+background:#003366;
+align-items:center;
+justify-content:space-around;
+display:flex;
 margin:5px;
 border-radius:10px
+`
+export const Number =styled.div`
+width:60px;
+height:60px;
+border-radius:100px;
+background:#ccc;
+align-items:center;
+font-size:25px;
+font-weight:bold;
+justify-content:center;
+display:flex;
+`
+
+export const ALLBoxContent =styled.div`
+width:80%;
+height:100px;
+color:white;
+display:flex;
+align-items:center;
 `
