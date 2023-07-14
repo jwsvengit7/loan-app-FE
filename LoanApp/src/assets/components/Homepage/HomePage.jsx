@@ -1,7 +1,6 @@
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import Main from "./Main.JSX";
-import {useEffect,useState} from 'react'
 
 export default function HomePage(){
     const navbar =[

@@ -2,8 +2,7 @@ import styled from 'styled-components'
 import background from '../Images/background.png'
 import {FormPage,Img,H1,
     FormDiv,Form,FormLogo,
-    SelectType,
-    ButtonType,LogoDiv2,
+    SelectType,ButtonType,LogoDiv2,
     ButtonType2,
     LabelInput,
     LabelI,
@@ -15,7 +14,7 @@ import {FormPage,Img,H1,
 } from '../Styled/Styled'
 import logo from '../Images/logo_.png'
 import { Link  } from 'react-router-dom'
-const Userforms =()=>{
+const UserFormsAuth =()=>{
     return(
         <>
         <FormPage>
@@ -27,23 +26,11 @@ const Userforms =()=>{
                 <H1>EasyLend</H1>
             </LogoDiv2>
                 </FormLogo>
-                <h1>Create a new Account</h1>
-                <SelectType>
-                <ButtonType value="BORROWER">
-                    Borrower
-                        
-                        </ButtonType>
-                        <ButtonType2 value="LENDER">
-                            Lender
-                        
-                        </ButtonType2>
-
-                </SelectType>
+                <h1>Welcome back to EasyLend</h1>
+              
+                
                 <LabelInput>
-                <LabelI>
-                        Full Name
-                        <Input type="" placeholder="Enter your full names"></Input>
-                    </LabelI>
+              
                     <LabelI>
                         Email Address
                         <Input type="" placeholder="Enter your email"></Input>
@@ -52,19 +39,17 @@ const Userforms =()=>{
                         Password
                         <Input type="password" placeholder="*****************************"></Input>
                     </LabelI>
-                    <LabelI style={{display:"flex"}}>
-                        <input type="checkbox" style={{margin:"10px",width:"30px"}} />
-                        <p style={{fontSize:"14px",color:""}}>
-                        By continuing you agree to EasyLend‘s Terms of Service and Privacy Policy,
-                        </p>
-
-                     </LabelI>
-                     <Botton>Sign up</Botton>
+                    <Link to="" >
+                        Forget password
+                    </Link>
+                   <p></p>
+                   
+                     <Botton>Login</Botton>
                   
 
 
                 </LabelInput>
-                <p>Already have an account ? <Link  style={{color:"blue"}} to="/login">Sign in here</Link></p>
+                <p>Don't have an account ? <Link style={{color:"blue"}} to="/signup">Sign up here</Link></p>
 
                 </Form>
 
@@ -79,5 +64,5 @@ const Userforms =()=>{
         </>
     )
 }
-export default Userforms;
+export default UserFormsAuth;
 

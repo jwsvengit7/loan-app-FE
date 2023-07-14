@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+import background from '../Images/background.png'
 export const Container = styled.div`
 width:100%;
 height:100vh;
@@ -342,4 +342,120 @@ height:100px;
 color:white;
 display:flex;
 align-items:center;
+`
+
+
+// form
+
+
+
+
+export const FormPage = styled.div`
+width:100%;
+height:120vh;
+background:white;
+display:flex;
+
+`
+export const FormLogo =styled.div`
+width:100%;
+height:50px;
+display:flex;
+justify-content:center;
+
+`
+export const LogoDiv2 =styled.div`
+width:40%;
+height:100%;
+display:flex;
+align-items:center
+`
+
+export const FormDiv = styled.div`
+width:50%;
+height:90%;
+display:flex;
+justify-content:center;
+align-items:center
+`
+
+export const Form = styled.form`
+width:500px;
+height:auto;
+padding:20px;
+display:flex;
+justify-content:center;
+flex-direction:column;
+border-radius:16px;
+box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.16);
+align-items:center;
+h1{
+    font-size:25px
+}
+`
+export const FormImage = styled.div`
+width:50%;
+background-image:url(${background});
+bakground-size:cover;
+`
+export const SelectType=styled.div`
+width:100%;
+height:50px;
+display:flex;
+border-radius:10px;
+border:1px solid #ccc
+`
+export const ButtonType =styled.button`
+width:50%;
+height:100%;
+background: rgba(45, 0, 247, 1);
+border-top-left-radius:10px;
+border-bottom-left-radius:10px;
+border:0px;
+color:white
+`
+
+export const ButtonType2 =styled.button`
+width:50%;
+height:100%;
+background: white;
+border-top-right-radius:10px;
+border-bottom-right-radius:10px;
+border:0px;
+`
+
+export const LabelInput =styled.div`
+width:100%;
+height:auto;
+margin:20px;
+color:#101828 !important
+`
+
+export const LabelI =styled.label`
+width:80%;
+height:auto;
+
+color:#101828 !important
+
+
+`
+export const Input =styled.input`
+width:95%;
+height:30px;
+border:0px;
+border:1px solid #ccc;
+margin-top:10px;
+margin-bottom:10px;
+padding:10px;
+border-radius:10px
+
+`
+
+export const Botton = styled.button`
+width:100%;
+height:50px;
+color:white;
+background: rgba(45, 0, 247, 1);
+border-radius:10px;
+border:0px;
 `

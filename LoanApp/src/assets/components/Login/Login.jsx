@@ -1,6 +1,11 @@
+import Header from "../Header/Header";
+import UserFormsAuth from "./UserFormsAuth";
+
 const Login = ()=>{
     return (
-        <>1
+        <>
+        <Header navbar={[]} />
+        <UserFormsAuth />
         </>
     )
 }

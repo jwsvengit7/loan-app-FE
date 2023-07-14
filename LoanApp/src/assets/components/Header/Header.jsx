@@ -16,6 +16,10 @@ function Header(props){
         window.removeEventListener("scroll", handleScroll);
       };
     }, []);
+
+    const home= ()=>{
+      window.location.href="/"
+    }
    
     return (
         <>
@@ -23,7 +27,7 @@ function Header(props){
         <Headers  className={isScrolled ? "fixed-header" : ""}>
         <PerfectLine>
             <LogoDiv>
-                <Img src={logo} alt="logo" width={50} />
+                <Img onclick={home} src={logo} alt="logo" width={50} />
                 <H1>EasyLend</H1>
             </LogoDiv>
             {(props.navbar.length>0) ? <NavBar items={props.navbar} /> :""}
