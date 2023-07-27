@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 const NavBar = (props)=>{
     return(
         <>
+        
         <Nav>
         <Link to="/">{props.items[0]}</Link>
         <Link to="/aboutUs">{props.items[1]}</Link>

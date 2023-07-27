@@ -7,7 +7,7 @@ export default function HomePage(){
         "Home","About Us","Login","Get Started"
     ]
 
- 
+
  
     return (
         <>

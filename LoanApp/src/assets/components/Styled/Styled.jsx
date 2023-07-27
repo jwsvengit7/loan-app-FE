@@ -458,4 +458,60 @@ color:white;
 background: rgba(45, 0, 247, 1);
 border-radius:10px;
 border:0px;
+`;
+
+export const Align =styled.div`
+width:100%;
+height:700px;
+display:flex;
+justify-content:center;
+align-items:center
+
+`
+
+export const Flex =styled.div`
+width:100%;
+height:auto;
+
+display:flex
+`
+export const SideDiv =styled.div`
+width:22%;
+height:600px;
+padding:20px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+h1{
+    font-size:30px;
+    color: rgb(45, 0, 247);
+    font-weight:none;
+
+}
+p{
+   margin:0px
+}
+
+`
+export const Body =styled.div`
+width:73%;
+height:600px;
+
+overflow:scroll;
+padding:20px;
+background: linear-gradient(0deg, #F2F4F7, #F2F4F7),
+linear-gradient(0deg, #D0D5DD, #D0D5DD);
+`
+
+export const AccountBox=styled.div`
+width:250px;
+height:200px;
+background: linear-gradient(0deg, #F2F4F7, #F2F4F7),
+linear-gradient(0deg, #D0D5DD, #D0D5DD);
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+border:1px solid #ccc;
+margin:20px;
 `
