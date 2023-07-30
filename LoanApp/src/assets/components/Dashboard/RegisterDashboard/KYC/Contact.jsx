@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useParams,Link } from 'react-router-dom';
 import Header from '../../../Header/Header';
 import ContactInfo from './ContactInfo';
@@ -19,6 +19,7 @@ import {
   UploadImg,
   PreloaderImage,
 } from '../../RegisterDashboard/Styled-dashboard';
+import axios from 'axios';
 
 import fileshield from '../images/file-shield-alt.png'
 
@@ -66,6 +67,20 @@ const Contact = () => {
 
 
   }
+
+  const [banks, setBanks] = useState([]);
+  const [bankName, setBankName] = useState("");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [accountName,setAccountName] = useState("")
+  const [loading,setLoading] = useState(false)
+  
+  useEffect(() => {
+    axios.get("https://api.paystack.co/bank")
+      .then(response => {
+        console.log(response.data.data);
+        setBanks(response.data.data);
+      });
+  }, []);
 
   return (
     <>
@@ -251,7 +266,9 @@ const Contact = () => {
 <input type="file" style={{display:"none"}} name="file" id="file-upload"   onChange={handleFileChange}  />
     
                   <ContentButton>
-                    <Link to={`../kyc/`+2}><Button style={
+                    <Link to={`../kyc/`+2}><Button
+                    type="button"
+                     style={
                         {
                             background:"#EAECF0",                          
                             color:"#222"
@@ -327,9 +344,7 @@ const Contact = () => {
                         <option>Select</option>
                       </InputSelect>
                   </WrapContent>
-    
                   <ContentButton>
-                 
                     <Link to={`../kyc/`+3}><Button style={
                         {
                             background:"#EAECF0",
@@ -386,13 +401,63 @@ const Contact = () => {
 <input type="file" style={{display:"none"}} name="file" id="file-upload"   onChange={handleFileChange}  />
     
                   <ContentButton>
-                    <Link to={`../kyc/`+4}><Button style={
+                    <Link to={`../kyc/`+4}><Button type="button" style={
                         {
                             background:"#EAECF0",                          
                             color:"#222"
                         }
                     }>Previous</Button></Link>&nbsp;&nbsp;
                     <Link to={`../kyc/`+6}><Button>Continue</Button></Link>
+                  </ContentButton>
+                </InfoContainers>
+    
+                </>
+    
+    :""}
+
+{(id==6)?
+            
+            <>
+                <h1>Link Bank Account</h1>
+                <InfoContainers>
+             
+
+<WrapContent>
+                    <Label>Bank Name</Label>
+                    <InputSelect
+                      type="text"
+                      name="bank"
+                      value={bankName}
+                      onChange={(e) => setBankName(e.target.value)} 
+                      >
+                        {banks.map((val, index) => (
+                    <option key={index} value={val.name}>{val.name}</option>
+                  ))}
+                      </InputSelect>
+                
+                  </WrapContent>
+                  <WrapContent>
+                    <Label>Account Number</Label>
+                    <InputField
+                      type="text"
+                      name="name"
+                      value={accountNumber}
+                      onChange={save} />
+                  </WrapContent>
+                
+                   
+                
+    
+                  <ContentButton>
+                 
+                    <Link to={`../kyc/`+4}><Button type="button" style={
+                        {
+                            background:"#EAECF0",
+                            color:"#222"
+                        }
+                    }>Previous</Button></Link>&nbsp;&nbsp;
+
+                    <Button>Submit</Button>
                   </ContentButton>
                 </InfoContainers>
     
