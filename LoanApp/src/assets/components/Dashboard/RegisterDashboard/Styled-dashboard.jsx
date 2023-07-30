@@ -21,9 +21,7 @@ nth-child(2){
 }
 `
 export const StausText =styled.div`
-padding-left:20px
-
-`
+padding-left:20px;`
 
 export const Info = styled.div`
 width:95%;
@@ -154,5 +152,18 @@ height:90px;
 input{
     font-size:15px
 }
+
+`
+
+export const MessageResponse =styled.div`
+width:99%;
+background:#FEFBE8;
+padding-left:10px;
+padding-top:20px;
+padding-bottom:20px;
+margin-bottom:15px;
+display: flex;
+align-items: center;
+font-size:13px
 
 `

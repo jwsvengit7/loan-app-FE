@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import background from '../Images/background.png'
 import {FormPage,Img,H1,
     FormDiv,Form,FormLogo,
-    SelectType,ButtonType,LogoDiv2,
-    ButtonType2,
+    SelectType,ImgLoader,LogoDiv2,
+    Preloader,
     LabelInput,
     LabelI,
     Input,
@@ -12,14 +12,112 @@ import {FormPage,Img,H1,
 
 
 } from '../Styled/Styled'
+import {useState} from 'react';
 import logo from '../Images/logo_.png'
 import { Link  } from 'react-router-dom'
+import {PORT,loader} from '../../Utils/AppUtils'
+import swal from 'sweetalert'
+import axios from 'axios'
 const UserFormsAuth =()=>{
+
+
+    const [formData, setFormData] = useState({
+        email: "",
+        password: ""
+      });
+
+      const [loading, setLoading] = useState(false);
+    
+      const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: value
+        }));
+      }
+      const handleSubmit = async (event) => {
+        event.preventDefault();
+    
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+          swal('ALERT', 'Invalid email format', 'error');
+        }   else {
+          try {
+            setLoading(true);
+            
+            const url = `http://localhost:${PORT}/api/v1/auth/login`;
+            const response = await axios.post(url, formData);
+            setLoading(false);
+    
+            console.log(response)
+          
+            const Token =response.data.data.accessToken;
+            const email =response.data.data.email;
+            const registrationStatus = response.data.data.registrationStatus;
+            const registrationStage = response.data.data.registrationStage;
+            console.log(Token)
+            localStorage.setItem("TOKEN",Token)
+         
+            localStorage.setItem("registrationStatus",registrationStatus)
+            swal("ALERT","Succesful Login","success")
+            const userDetails=response.data.data
+            if(!registrationStatus){
+                throw new Error("Err")
+            }
+
+            else if(registrationStatus && registrationStage>=6){
+                request_meethod("/dashboard")
+                localStorage.setItem("userDetails",JSON.stringify(userDetails))
+            }else if(registrationStage<6){
+                localStorage.setItem("userDetails",JSON.stringify(userDetails))
+                request_meethod("/confirm")
+            }
+    
+          } catch (err) {
+            setLoading(false);
+            console.log(err)
+            const data= err.response.data.data.message
+            if(data=="Network Error"){
+                swal('ALERT',"Try Again", 'error');
+            }else{
+            const message = err.response.data.data;
+        
+             if(message.message=="User Not Activated"){
+              swal('ALERT',message.message, 'error');
+              localStorage.setItem("email",formData.email)
+              window.location.href="/verify-message"
+            }
+            else{
+              swal('ALERT',message.message, 'error');
+            }
+        
+        }
+          }
+        }
+      };
+    
+      const request_meethod =(url)=>{
+          var x=0;
+          setInterval(() => {
+            x++;
+            if(x==3){
+              window.location.href=url
+            }
+            
+          }, 1000);
+      }
     return(
         <>
+        {(loading) ? 
+        <Preloader>
+            <ImgLoader src={loader} width={50}></ImgLoader>
+        </Preloader>
+
+        :
+        
+      
         <FormPage>
             <FormDiv>
-                <Form>
+                <Form onSubmit={handleSubmit} method="post">
                 <FormLogo>
                 <LogoDiv2>
                 <Img src={logo} alt="logo" width={50} />
@@ -33,11 +131,21 @@ const UserFormsAuth =()=>{
               
                     <LabelI>
                         Email Address
-                        <Input type="" placeholder="Enter your email"></Input>
+                        <Input type="email" 
+                        onChange={handleChange} 
+                        value={formData.email} 
+                        name="email"
+                        placeholder="Enter your email"></Input>
                     </LabelI>
                     <LabelI>
                         Password
-                        <Input type="password" placeholder="*****************************"></Input>
+                        <Input type="password" 
+                         name="password"
+                         onChange={handleChange} 
+                        value={formData.password} 
+                        placeholder="*****************************"
+                       
+                        ></Input>
                     </LabelI>
                     <Link to="" >
                         Forget password
@@ -59,7 +167,7 @@ const UserFormsAuth =()=>{
             </FormImage>
 
         </FormPage>
-        
+}
         
         </>
     )

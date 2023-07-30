@@ -515,3 +515,54 @@ flex-direction:column;
 border:1px solid #ccc;
 margin:20px;
 `
+
+export const Preloader =styled.div`
+width:100%;
+height:100vh;
+position:fixed;
+background:white;
+top:0px;
+display:flex;
+justify-content:center;
+align-items:center
+`
+
+export const ImgLoader =styled.img`
+height:50px`
+
+
+export const BodyToken =styled.div`
+width:100%;
+height:100vh;
+background:#fff;
+display:flex;
+justify-content:center;
+align-items:center;
+`
+export const Modar =styled.form`
+width:424px;
+height:300px;
+border-radius:16px;
+padding:40px;
+box-shadow: 0px 6px 16px 0px #00000029;
+flex-direction:column;
+display:flex;
+align-items:center;
+justify-content:center;
+
+h1{
+    font-size:30px;
+}
+p{
+    text-align:center
+}
+`
+
+export const ButtonEmail =styled.button`
+width:90%;
+height:50px;
+border-radius:20px;
+background:#2D00F7;
+color:white;
+border:0px
+`

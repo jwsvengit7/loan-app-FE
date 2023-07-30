@@ -15,6 +15,7 @@ import {
   InputField,
   ButtonForm,
   UPLOAD,
+  MessageResponse,
 
   UploadImg,
   PreloaderImage,
@@ -442,15 +443,26 @@ const Contact = () => {
                       type="text"
                       name="name"
                       value={accountNumber}
-                      onChange={save} />
+                      onChange={(e) => setAccountNumber(e.target.value)}
+                       />
                   </WrapContent>
+
+
+                  {(accountName!="") ? <MessageResponse>{accountName}
+             <input type="hidden" 
+             
+             onChange={(e) => setAccountName(e.target.value)} 
+             value={accountName} />
+             
+             </MessageResponse> :  ""} 
                 
                    
                 
     
                   <ContentButton>
                  
-                    <Link to={`../kyc/`+4}><Button type="button" style={
+                    <Link to={`../kyc/`+4}>
+                        <Button type="button" style={
                         {
                             background:"#EAECF0",
                             color:"#222"

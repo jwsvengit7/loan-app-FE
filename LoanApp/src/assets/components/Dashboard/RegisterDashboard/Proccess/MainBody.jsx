@@ -5,6 +5,8 @@ import icon2 from '../images/icon (2).png'
 import icon3 from '../images/icon (3).png'
 import icon4 from '../images/icon (4).png'
 import Information from "../KYC/Information";
+import { Button, ButtonForm, ContentButton } from "../Styled-dashboard";
+import { Link } from "react-router-dom";
 const MainBody =()=>{
  
 
@@ -15,7 +17,7 @@ const MainBody =()=>{
             <h1>&nbsp;&nbsp;&nbsp;&nbsp;Finish Setting up your account</h1>
 
             <Account>
-            <AccountBox>
+            <AccountBox >
                     <ImgAccount src={icon1} alt=''>
 
                     </ImgAccount>
@@ -26,37 +28,44 @@ const MainBody =()=>{
                     <ImgAccount src={icon2} alt=''>
 
                     </ImgAccount>
-                    <h1>Conact Information</h1>
+                    <h1>Employement Status</h1>
 
                 </AccountBox>
                 <AccountBox>
                     <ImgAccount src={icon3} alt=''>
 
                     </ImgAccount>
-                    <h1>Conact Information</h1>
+                    <h1>Government Issued-ID</h1>
 
                 </AccountBox>
                 <AccountBox>
                     <ImgAccount src={icon4} alt=''>
 
                     </ImgAccount>
-                    <h1>Conact Information</h1>
+                    <h1>Income Status</h1>
 
                 </AccountBox>
                 <AccountBox>
                     <ImgAccount src={icon4} alt=''>
 
                     </ImgAccount>
-                    <h1>Conact Information</h1>
+                    <h1>Proof of Status</h1>
 
                 </AccountBox>
                 <AccountBox>
                     <ImgAccount src={icon1} alt=''>
 
                     </ImgAccount>
-                    <h1>Conact Information</h1>
+                    <h1>Link Bank Account</h1>
 
                 </AccountBox>
+
+                <ContentButton style={{
+                    width:"82%"
+                }}>
+              
+                    <Link to={`../kyc/`+1}><Button>Continue</Button></Link>
+                  </ContentButton>
 
             </Account>
 

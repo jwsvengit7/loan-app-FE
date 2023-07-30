@@ -36,6 +36,8 @@ const ContactInfo =(props)=>{
                 </StatusImage>
                 <StausText>Linked Bank Account</StausText>
             </StatusRow>
+
+            
             
         </ContactStatus>
         </>
