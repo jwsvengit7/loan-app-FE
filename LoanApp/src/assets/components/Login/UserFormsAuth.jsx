@@ -84,7 +84,7 @@ const UserFormsAuth =()=>{
              if(message.message=="User Not Activated"){
               swal('ALERT',message.message, 'error');
               localStorage.setItem("email",formData.email)
-              window.location.href="/verify-message"
+              window.location.href="/verify-message" 
             }
             else{
               swal('ALERT',message.message, 'error');
