@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import swal from 'sweetalert';
 import { PORT, loader, activeIcon, inact } from '../../Utils/AppUtils';
-import { Preloader, ImgLoader, BodyToken, Modar } from '../Styled/Styled';
+import { Preloader, ImgLoader, BodyToken, Modar,ButtonEmail } from '../Styled/Styled';
 import { useLocation } from 'react-router-dom';
 
 const Token = () => {
@@ -53,6 +53,10 @@ const Token = () => {
     return null;
   }
 
+  const login =()=>{
+    window.location.href="/login"
+  }
+
   return (
     <>
       {!loading ? (
@@ -70,6 +74,7 @@ const Token = () => {
                 Welcome to Customer Support! Our platform is designed to provide you with an
                 exceptional user experience
               </p>
+              <ButtonEmail type ="button" onClick={login} >Go to Login</ButtonEmail>
             </Modar>
           </BodyToken>
         </>

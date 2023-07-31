@@ -54,21 +54,23 @@ const UserFormsAuth =()=>{
             const email =response.data.data.email;
             const registrationStatus = response.data.data.registrationStatus;
             const registrationStage = response.data.data.registrationStage;
-            console.log(Token)
+           
             localStorage.setItem("TOKEN",Token)
          
             localStorage.setItem("registrationStatus",registrationStatus)
             swal("ALERT","Succesful Login","success")
-            const userDetails=response.data.data
+            const userDetails=response.data.data;
+            console.log(userDetails)
+            localStorage.setItem("userDetails",JSON.stringify(userDetails))
             if(!registrationStatus){
                 throw new Error("Err")
             }
 
             else if(registrationStatus && registrationStage>=6){
                 request_meethod("/dashboard")
-                localStorage.setItem("userDetails",JSON.stringify(userDetails))
+                
             }else if(registrationStage<6){
-                localStorage.setItem("userDetails",JSON.stringify(userDetails))
+               
                 request_meethod("/confirm")
             }
     

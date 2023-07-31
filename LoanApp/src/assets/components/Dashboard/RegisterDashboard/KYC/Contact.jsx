@@ -30,12 +30,20 @@ const Contact = () => {
     const [image,setImage] =useState(null);
     const [imageUrl,setImageUrl] =useState(null)
 
-  const [formdata, setFormdata] = useState({
-    name: '',
-    lastname: '',
-    email: '',
-    number: '',
-  });
+    const [firstname,setFirstname]= useState("");
+    const [lastName,setLastname]= useState("");
+    const [email,setEmail]= useState("");
+    const [number,setNumber]= useState(0);
+  
+
+   const userdetails = localStorage.getItem("userDetails");
+   const TOKEN = localStorage.getItem("TOKEN");
+   console.log(TOKEN)
+   const converted =JSON.parse(userdetails);
+     console.log(converted.email)
+
+
+
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -48,25 +56,20 @@ const Contact = () => {
   };
 
   function save(event) {
-    const { name, value } = event.target;
-    setFormdata((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+ 
   }
 
   function checkType() {
-    if (formdata.name === '' || formdata.lastname === '' ||
-     formdata.email === '' || formdata.number === '') {
+    if (firstname === '' || lastName === '' ||
+        email === '' || number === '') {
       return false;
     }
+
     return true;
   }
 
   function next(){
     setCount(count+1)
-
-
   }
 
   const [banks, setBanks] = useState([]);
@@ -81,7 +84,32 @@ const Contact = () => {
         console.log(response.data.data);
         setBanks(response.data.data);
       });
+      setEmail(converted.email)
+      setFirstname(converted.username)
+
+      function getLastWord(str) {
+    
+        str = str.trim();
+        const wordsArray = str.split(/\s+/);
+      
+        const lastWord = wordsArray[wordsArray.length - 1];
+        return lastWord;
+      }
+      function getFirstname(str) {
+    
+        str = str.trim();
+        const wordsArray = str.split(/\s+/);
+    
+        const fistword = wordsArray[0];
+        return fistword;
+      }
+      setLastname(getLastWord(converted.username))
+      setFirstname(getFirstname(converted.username))
+
+
   }, []);
+
+  // const getStage = axios.get("")
 
   return (
     <>
@@ -102,8 +130,9 @@ const Contact = () => {
                 <InputField
                   type="text"
                   name="name"
-                  value={formdata.name}
-                  onChange={save}
+              
+                  value={firstname}
+                  onChange={(e) => setFirstname(e.target.value)}
                 />
               </WrapContent>
               <WrapContent>
@@ -111,8 +140,8 @@ const Contact = () => {
                 <InputField
                   type="text"
                   name="lastname"
-                  value={formdata.lastname}
-                  onChange={save}
+                  value={lastName}
+                  onChange={(e) => setLastname(e.target.value)}
                 />
               </WrapContent>
               <WrapContent>
@@ -120,8 +149,9 @@ const Contact = () => {
                 <InputField
                   type="email"
                   name="email"
-                  value={formdata.email}
-                  onChange={save}
+                  readonly="true"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </WrapContent>
               <WrapContent>
@@ -129,14 +159,14 @@ const Contact = () => {
                 <InputField
                   type="number"
                   name="number"
-                  value={formdata.number}
-                  onChange={save}
+                  value={number}
+                  onChange={(e) => setNumber(e.target.value)}
                 />
               </WrapContent>
 
               <ContentButton>
                 {/* <Button onClick={next} type="button">Continue</Button> */}
-                <Link to={`../kyc/`+2}><Button>Continue</Button></Link>
+                <Button>Continue</Button>
               </ContentButton>
             </InfoContainers>
 

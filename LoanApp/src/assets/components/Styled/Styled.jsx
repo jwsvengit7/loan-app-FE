@@ -520,7 +520,7 @@ export const Preloader =styled.div`
 width:100%;
 height:100vh;
 position:fixed;
-background:white;
+background:rgba(0,0,0,0.5);
 top:0px;
 display:flex;
 justify-content:center;
@@ -541,7 +541,7 @@ align-items:center;
 `
 export const Modar =styled.form`
 width:424px;
-height:300px;
+height:390px;
 border-radius:16px;
 padding:40px;
 box-shadow: 0px 6px 16px 0px #00000029;
