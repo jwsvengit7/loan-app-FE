@@ -30,20 +30,55 @@ const Contact = () => {
     const [image,setImage] =useState(null);
     const [imageUrl,setImageUrl] =useState(null)
 
-    const [firstname,setFirstname]= useState("");
+    const [firstName,setFirstname]= useState("");
     const [lastName,setLastname]= useState("");
     const [email,setEmail]= useState("");
     const [number,setNumber]= useState(0);
+    const [loading,setLoading]= useState(false);
+
+    const [formdata,setFormdata] = useState({})
+
+    const [banks, setBanks] = useState([]);
+    const [bankName, setBankName] = useState("");
+    const [accountNumber, setAccountNumber] = useState("");
+    const [accountName,setAccountName] = useState("")
+    const [loading2x,set2x] =useState(false)
   
-
-   const userdetails = localStorage.getItem("userDetails");
    const TOKEN = localStorage.getItem("TOKEN");
+   
    console.log(TOKEN)
-   const converted =JSON.parse(userdetails);
-     console.log(converted.email)
+    
+   useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const TOKEN = localStorage.getItem('TOKEN');
+        const url = 'http://localhost:8083/api/profile/getDetails';
+        const headers = {
+          Authorization: `Bearer ${TOKEN}`,
+          'Content-Type': 'application/json',
+        };
 
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: headers,
+        });
 
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
 
+        const data = await response.json();
+        setEmail(data.data.email);
+        setFirstname(data.data.firstName);
+        setLastname(data.data.lastName);
+        setNumber(data.data.phoneNumber);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -59,24 +94,14 @@ const Contact = () => {
  
   }
 
-  function checkType() {
-    if (firstname === '' || lastName === '' ||
-        email === '' || number === '') {
-      return false;
-    }
 
-    return true;
-  }
 
   function next(){
     setCount(count+1)
   }
 
-  const [banks, setBanks] = useState([]);
-  const [bankName, setBankName] = useState("");
-  const [accountNumber, setAccountNumber] = useState("");
-  const [accountName,setAccountName] = useState("")
-  const [loading,setLoading] = useState(false)
+
+
   
   useEffect(() => {
     axios.get("https://api.paystack.co/bank")
@@ -84,32 +109,56 @@ const Contact = () => {
         console.log(response.data.data);
         setBanks(response.data.data);
       });
-      setEmail(converted.email)
-      setFirstname(converted.username)
-
-      function getLastWord(str) {
-    
-        str = str.trim();
-        const wordsArray = str.split(/\s+/);
-      
-        const lastWord = wordsArray[wordsArray.length - 1];
-        return lastWord;
-      }
-      function getFirstname(str) {
-    
-        str = str.trim();
-        const wordsArray = str.split(/\s+/);
-    
-        const fistword = wordsArray[0];
-        return fistword;
-      }
-      setLastname(getLastWord(converted.username))
-      setFirstname(getFirstname(converted.username))
-
+ 
 
   }, []);
 
-  // const getStage = axios.get("")
+  function checkType() {
+ 
+    return (
+      firstName !== '' && 
+      lastName !== '' &&
+      email !== '' &&
+      number !== ''
+    );
+  }
+
+
+   const contact =(formdata)=>{
+    try{
+      setLoading(true)
+     
+          console.log(formdata)
+          const url = "http://localhost:8083/api/profile/contact-information";
+          const config = {
+            headers: {
+              Authorization: `Bearer ${TOKEN}`,
+              'Content-Type': 'application/json', 
+            },
+          };
+      
+          axios.put(url, formdata, config)
+            .then((response) => {
+              setLoading(false)
+              console.log(response);
+              if(response.data.data=="success"){
+                set2x(true)
+
+              }
+            })
+            .catch((error) => {
+              setLoading(false)
+              console.error(error);
+            });
+          }
+          catch(error){
+            setLoading(false)
+            console.error(error);
+          }
+      
+        
+  }
+
 
   return (
     <>
@@ -124,14 +173,32 @@ const Contact = () => {
             
         <>
             <h1>Contact Information</h1>
-            <InfoContainers>
+         
+            <InfoContainers onSubmit={(e) => {
+               e.preventDefault(); 
+              
+               
+                contact(
+                {
+                  firstName:firstName,
+                    lastName:lastName,
+                    email:email,
+                    phoneNumber:number,
+                  }
+                
+               );
+
+               
+              
+               }
+               }>
               <WrapContent>
                 <Label>First Name</Label>
                 <InputField
                   type="text"
-                  name="name"
+                  name="firstName"
               
-                  value={firstname}
+                  value={firstName}
                   onChange={(e) => setFirstname(e.target.value)}
                 />
               </WrapContent>
@@ -166,7 +233,8 @@ const Contact = () => {
 
               <ContentButton>
                 {/* <Button onClick={next} type="button">Continue</Button> */}
-                <Button>Continue</Button>
+                <p>{(loading)? "Loading ..... " : ""}</p>&nbsp;&nbsp;&nbsp;&nbsp;
+             {(!loading2x) ?  <Button>Save</Button> :<Link to={`../kyc/`+2}><Button type="button">Next</Button></Link> }
               </ContentButton>
             </InfoContainers>
 
@@ -187,6 +255,8 @@ const Contact = () => {
                       value={formdata.name}
                       onChange={save}>
                         <option>Select</option>
+                        <option>YES</option>
+                        <option>NO</option>
 
                       </InputSelect>
                 
@@ -196,8 +266,10 @@ const Contact = () => {
                     <InputSelect
                       type="text"
                       name="name"
-                      value={formdata.name}
-                      onChange={save}><option>Select</option>
+                      onChange={save}>
+                      <option>15,000</option>
+                      <option>150,000</option>
+                      <option>2,000</option>
 
                       </InputSelect>
                   </WrapContent>
@@ -219,7 +291,8 @@ const Contact = () => {
                       name="name"
                       value={formdata.name}
                       onChange={save}>
-                        <option>Select</option>
+                        <option>Remote</option>
+                        <option>Hybrid</option>
                       </InputSelect>
                   </WrapContent>
     
