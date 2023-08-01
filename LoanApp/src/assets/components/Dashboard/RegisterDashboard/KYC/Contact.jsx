@@ -35,19 +35,25 @@ const Contact = () => {
     const [email,setEmail]= useState("");
     const [number,setNumber]= useState(0);
     const [loading,setLoading]= useState(false);
+    const [loading3,setLoading3]= useState(false);
 
-    const [formdata,setFormdata] = useState({})
+    const [document,setDocs] = useState({
+      documentType:"",
+      documentNumber:""
+
+    })
 
     const [banks, setBanks] = useState([]);
     const [bankName, setBankName] = useState("");
     const [accountNumber, setAccountNumber] = useState("");
     const [accountName,setAccountName] = useState("")
     const [loading2x,set2x] =useState(false)
+    const [loading2x3,set2x3] =useState(false)
   
    const TOKEN = localStorage.getItem("TOKEN");
    
    console.log(TOKEN)
-    
+
    useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -79,39 +85,16 @@ const Contact = () => {
 
     fetchUserData();
   }, []);
+  
 
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    setImage(selectedFile);
-    const objectUrl = URL.createObjectURL(selectedFile);
-    setImageUrl(objectUrl);
-    
-    console.log(image)
-    console.log(imageUrl)
-  };
 
   function save(event) {
  
   }
 
-
-
   function next(){
     setCount(count+1)
   }
-
-
-
-  
-  useEffect(() => {
-    axios.get("https://api.paystack.co/bank")
-      .then(response => {
-        console.log(response.data.data);
-        setBanks(response.data.data);
-      });
- 
-
-  }, []);
 
   function checkType() {
  
@@ -123,6 +106,15 @@ const Contact = () => {
     );
   }
 
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage(selectedFile);
+    console.log(selectedFile)
+    const objectUrl = URL.createObjectURL(selectedFile);
+    setImageUrl(objectUrl);
+    
+
+  };
 
    const contact =(formdata)=>{
     try{
@@ -158,6 +150,71 @@ const Contact = () => {
       
         
   }
+  const saveDocs = (event) => {
+    const { name, value } = event.target;
+    setDocs((prevFormData) => ({
+      ...prevFormData,
+      [name]: value
+    }));
+  }
+
+  const employment = (e)=>{
+    e.preventDefault()
+
+    try{
+      setLoading3(true)
+      const formdataDocs = {
+    
+        documentType:document.documentType,
+        documentNumber:document.documentNumber,
+        url:selectedFile
+
+      }
+     
+          console.log(formdataDocs)
+          const url = "http://localhost:8083/api/profile/government-id";
+          const config = {
+            headers: {
+              Authorization: `Bearer ${TOKEN}`,
+              'Content-Type': 'application/json', 
+            },
+            params:{
+              governmentIDDTO:document,
+              file:selectedFile
+            }
+          };
+      
+          axios.get(url, config)
+            .then((response) => {
+              setLoading3(false)
+              console.log(response);
+              if(response.data.data=="success"){
+                set2x3(true)
+              }
+            })
+            .catch((error) => {
+              setLoading3(false)
+              console.error(error);
+            });
+          }
+          catch(error){
+            setLoading(false)
+            console.error(error);
+          }
+
+  }
+
+ 
+  
+  useEffect(() => {
+    axios.get("https://api.paystack.co/bank")
+      .then(response => {
+        console.log(response.data.data);
+        setBanks(response.data.data);
+      });
+ 
+
+  }, []);
 
 
   return (
@@ -252,7 +309,7 @@ const Contact = () => {
                     <InputSelect
                       type="text"
                       name="name"
-                      value={formdata.name}
+                     
                       onChange={save}>
                         <option>Select</option>
                         <option>YES</option>
@@ -267,6 +324,7 @@ const Contact = () => {
                       type="text"
                       name="name"
                       onChange={save}>
+                          <option>Select</option>
                       <option>15,000</option>
                       <option>150,000</option>
                       <option>2,000</option>
@@ -278,7 +336,7 @@ const Contact = () => {
                     <InputSelect
                       type="text"
                       name="name"
-                      value={formdata.name}
+                      
                       onChange={save}>
                         <option>Select</option>
 
@@ -289,8 +347,9 @@ const Contact = () => {
                     <InputSelect
                       type="text"
                       name="name"
-                      value={formdata.name}
-                      onChange={save}>
+                    
+                      onChange={(e) => setFormdata({ ...formdata, name: e.target.value })}
+                      >
                         <option>Remote</option>
                         <option>Hybrid</option>
                       </InputSelect>
@@ -316,30 +375,32 @@ const Contact = () => {
         {(id==3)?        
             <>
                 <h1>Employment Status</h1>
-                <InfoContainers>
+                <InfoContainers onSubmit={employment}>
                   <WrapContent>
                     <Label>Document Type</Label>
                     <InputSelect
-                      type="text"
-                      name="name"
-                      value={formdata.name}
-                      onChange={save}>
-                        <option>Select</option>
+                    
+                      name="documentType"
+                      value={document.documentType}
+                      onChange={saveDocs}>
+                        <option>NIN</option>
+                        <option>International Passport</option>
+                        <option>Driving Lincense</option>
                       </InputSelect>
                 
                   </WrapContent>
                   <WrapContent>
                     <Label>How much do you earn?</Label>
                     <InputField
-                      type="text"
-                      name="name"
-                      value={formdata.name}
-                      onChange={save}
+                      type="number"
+                      name="documentNumber"
+                      value={document.documentNumber}
+                      onChange={saveDocs}
                       />
                   </WrapContent>
          <UploadImg htmlFor="file-upload">
 
-                <ButtonForm   type="button" style={{
+                <ButtonForm  type="button" style={{
                     background:"unset",
                 borderBottom:"1px solid #ccc",
                 color:"#222",margin:"0px"
@@ -378,7 +439,10 @@ const Contact = () => {
                             color:"#222"
                         }
                     }>Previous</Button></Link>&nbsp;&nbsp;
-                    <Link to={`../kyc/`+4}><Button>Continue</Button></Link>
+                    <Link to={`../kyc/`+4}></Link>
+
+                    {/* <p>{(loading3)? "Loading ..... " : ""}</p>&nbsp;&nbsp;&nbsp;&nbsp; */}
+                    <Link to={`../kyc/`+4}><Button type="button">Next</Button></Link> 
                   </ContentButton>
                 </InfoContainers>
     
@@ -396,7 +460,7 @@ const Contact = () => {
                     <InputSelect
                       type="text"
                       name="name"
-                      value={formdata.name}
+                     
                       onChange={save}>
                         <option>Select</option>
 
@@ -408,7 +472,7 @@ const Contact = () => {
                     <InputSelect
                       type="text"
                       name="name"
-                      value={formdata.name}
+                   
                       onChange={save}><option>Select</option>
 
                       </InputSelect>
@@ -443,7 +507,7 @@ const Contact = () => {
                     <InputSelect
                       type="text"
                       name="name"
-                      value={formdata.name}
+                  
                       onChange={save}>
                         <option>Select</option>
                       </InputSelect>
@@ -502,7 +566,7 @@ const Contact = () => {
 }
 
 </UploadImg>
-<input type="file" style={{display:"none"}} name="file" id="file-upload"   onChange={handleFileChange}  />
+<input type="file" style={{display:"none"}} name="file2" id="file-upload"   />
     
                   <ContentButton>
                     <Link to={`../kyc/`+4}><Button type="button" style={
@@ -572,7 +636,7 @@ const Contact = () => {
                         }
                     }>Previous</Button></Link>&nbsp;&nbsp;
 
-                    <Button>Submit</Button>
+                    <Button type="button" onClick={window.location.href="http://localhost:5173/dashboard"}>Submit</Button>
                   </ContentButton>
                 </InfoContainers>
     

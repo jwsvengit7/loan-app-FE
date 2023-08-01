@@ -541,7 +541,7 @@ align-items:center;
 `
 export const Modar =styled.form`
 width:424px;
-height:390px;
+height:auto;
 border-radius:16px;
 padding:40px;
 box-shadow: 0px 6px 16px 0px #00000029;
@@ -549,6 +549,7 @@ flex-direction:column;
 display:flex;
 align-items:center;
 justify-content:center;
+background:white;
 
 h1{
     font-size:30px;

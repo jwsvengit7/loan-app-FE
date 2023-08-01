@@ -25,6 +25,7 @@ function App() {
         <Route path="/user-auth" element = {<Token />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/verify-message" element={<VerifyMessage />} />
+        {/* <Route path="/logout" element={<Logout />} /> */}
       </Routes>
     </Router>
   );
