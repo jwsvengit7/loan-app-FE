@@ -9,7 +9,6 @@ import Confirm from './assets/components/Dashboard/RegisterDashboard/Proccess/Co
 import Contact from './assets/components/Dashboard/RegisterDashboard/KYC/Contact';
 import Dashboard from './assets/components/Dashboard/UserDashboard/Dashboard';
 import Token from './assets/components/Token/Token';
-import VerifyMessage from './assets/components/Token/VerifyMessage'
 import Logout from './assets/components/Dashboard/Logout/Logout'
 import Lending from './assets/components/Dashboard/UserDashboard/Lending/Lending';
 
@@ -26,7 +25,7 @@ function App() {
         <Route path="/kyc/:id" element = {<Contact />} />
         <Route path="/user-auth" element = {<Token />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/verify-message" element={<VerifyMessage />} />
+        {/* <Route path="/verify-message" element={<VerifyMessage />} /> */}
         <Route path="/logout" element={<Logout />} />
         <Route path='/leading' element = {<Lending />} />
       </Routes>
