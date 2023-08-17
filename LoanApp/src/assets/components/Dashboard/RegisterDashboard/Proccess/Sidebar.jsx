@@ -1,5 +1,4 @@
 import {SideDiv} from "../../../Styled/Styled";
-import ContactInfo from "../KYC/ContactInfo";
 const Sidebar =()=>{
    
   

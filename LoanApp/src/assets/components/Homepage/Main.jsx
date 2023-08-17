@@ -3,12 +3,19 @@ import { MainDiv,
     BoxALL,
     ALLBox,
     ALLBoxContent,
+    BlueIvContainer,
     Number,
     LevelRol, 
+    ImageTesti,
+    BlueIv,
+    ImgInRound,
     AboutUs,
     Content1,
+    Testimonies,
+    TestiBox,
     Button,
     Splash,
+    TestimoniesOverLay,
     Award,
     Content2,
     MainTwo,
@@ -27,6 +34,8 @@ import article3 from '../Images/article3.png'
 import ImageContent from "./ImageContent";
 
 const Main =()=>{
+
+
     return (
         <>
         <MainDiv>
@@ -210,6 +219,108 @@ const Main =()=>{
 
                    </BlueDiv>
             </MainContent>
+            <MainContent style={{background:"unset"}}>
+                <BlueDiv style={{width:"100%"}}>
+                <h2 style={{color:"black"}}>WHAT PEOPLE ARE SAYING</h2>
+                <h1 style={{color:"black",margin:"0px"}}>Testimonials</h1> 
+              
+
+             
+                <Testimonies>
+                <TestimoniesOverLay>
+             
+                   
+                <TestiBox>
+                        <ImageTesti>
+                            <ImgInRound src={frame} alt="">
+                            </ImgInRound>
+                        </ImageTesti>
+                        <p>Lorem ipsum dolor sit amet consectetur. Vestibulum purus mi risus faucibus ultricies morbi sagittis. Arcu eget dolor varius vitae cursus quis. Imperdiet nunc enim in magna neque nisl. Lectus non dis a sit leo ipsum elementum ultrices velit.</p>
+                        <p>
+
+                        Lorem ipsum dolor sit amet consectetur. Vestibulum purus mi risus faucibus ultricies morbi sagittis. 
+                        </p>
+                        <h5>opara ifenyi</h5>
+                        <span>Data Analysis</span>
+
+                    </TestiBox>
+                   
+                    <TestiBox>
+                        <ImageTesti>
+                            <ImgInRound src={article1} alt="">
+                            </ImgInRound>
+                        </ImageTesti>
+                        <p>Lorem ipsum dolor sit amet consectetur. Vestibulum purus mi risus faucibus ultricies morbi sagittis. Arcu eget dolor varius vitae cursus quis. Imperdiet nunc enim in magna neque nisl. Lectus non dis a sit leo ipsum elementum ultrices velit.</p>
+                        <p>
+
+                        Lorem ipsum dolor sit amet consectetur. Vestibulum purus mi risus faucibus ultricies morbi sagittis. 
+                        </p>
+                        <h5>opara ifenyi</h5>
+                        <span>Data Analysis</span>
+
+                    </TestiBox>
+                   
+                    <TestiBox>
+                        <ImageTesti>
+                            <ImgInRound src={frame} alt="">
+                            </ImgInRound>
+                        </ImageTesti>
+                        <p>Lorem ipsum dolor sit amet consectetur. Vestibulum purus mi risus faucibus ultricies morbi sagittis. Arcu eget dolor varius vitae cursus quis. Imperdiet nunc enim in magna neque nisl. Lectus non dis a sit leo ipsum elementum ultrices velit.</p>
+                        <p>
+
+                        Lorem ipsum dolor sit amet consectetur. Vestibulum purus mi risus faucibus ultricies morbi sagittis. 
+                        </p>
+                        <h5>opara ifenyi</h5>
+                        <span>Data Analysis</span>
+
+                    </TestiBox>
+                   
+                    <TestiBox>
+                        <ImageTesti>
+                            <ImgInRound src={article1} alt="">
+                            </ImgInRound>
+                        </ImageTesti>
+                        <p>Lorem ipsum dolor sit amet consectetur. Vestibulum purus mi risus faucibus ultricies morbi sagittis. Arcu eget dolor varius vitae cursus quis. Imperdiet nunc enim in magna neque nisl. Lectus non dis a sit leo ipsum elementum ultrices velit.</p>
+                        <p>
+
+                        Lorem ipsum dolor sit amet consectetur. Vestibulum purus mi risus faucibus ultricies morbi sagittis. 
+                        </p>
+                        <h5>opara ifenyi</h5>
+                        <span>Data Analysis</span>
+
+                    </TestiBox>
+             
+                       </TestimoniesOverLay>
+                    </Testimonies>   
+                               
+                </BlueDiv>
+            </MainContent>
+            <BlueIv style={{
+               background: "rgba(45, 0, 247, 1)"
+            }}>
+            <BlueIvContainer>
+                <p>We Approve Loans</p>
+                <h1>90%</h1>
+
+</BlueIvContainer>
+<BlueIvContainer>
+<p>We Approve Loans</p>
+                <h1>90%</h1>
+
+</BlueIvContainer>
+<BlueIvContainer>
+<p>We Approve Loans</p>
+                <h1>90%</h1>
+
+</BlueIvContainer>
+<BlueIvContainer>
+<p>We Approve Loans</p>
+                <h1>90%</h1>
+
+</BlueIvContainer>
+            </BlueIv>
+            
+
             </MainDiv>
         </>
     )

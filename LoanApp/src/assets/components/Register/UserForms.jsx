@@ -1,5 +1,4 @@
-import styled from 'styled-components'
-import background from '../Images/background.png'
+
 import {FormPage,Img,H1,
     FormDiv,Form,FormLogo,
     SelectType,
@@ -18,7 +17,10 @@ import { Link  } from 'react-router-dom'
 import {useState} from 'react'
 import {PORT,loader} from '../../Utils/AppUtils'
 import axios from 'axios'
+import swal from 'sweetalert'
 const Userforms =()=>{
+
+  console.log(localStorage.getItem("email"))
 
   
         const [formData, setFormData] = useState({
@@ -66,18 +68,22 @@ const Userforms =()=>{
             try {
               setLoading(true);
       
+              console.log(111)
+             
          
+        
       
               const response = await axios.post(`http://localhost:${PORT}/api/v1/auth/register/LENDER`, formData);
       
               setLoading(false);
-        
-              const email = response.data.data.email;
+              localStorage.setItem("email",formData.email);
               const status = response.data.data.registrationStatus;
+            
               console.log(response);
               console.log(status);
         
               if (response.status === 201 && status==false) {
+
                 window.location.href="/verify-message"
               }
             } catch (err) {

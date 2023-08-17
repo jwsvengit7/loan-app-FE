@@ -1,8 +1,6 @@
-import styled from 'styled-components'
-import background from '../Images/background.png'
+
 import {FormPage,Img,H1,
-    FormDiv,Form,FormLogo,
-    SelectType,ImgLoader,LogoDiv2,
+    FormDiv,Form,FormLogo,ImgLoader,LogoDiv2,
     Preloader,
     LabelInput,
     LabelI,
@@ -56,6 +54,8 @@ const UserFormsAuth =()=>{
             const registrationStage = response.data.data.registrationStage;
            
             localStorage.setItem("TOKEN",Token)
+              
+            localStorage.setItem("email",email)
          
             localStorage.setItem("registrationStatus",registrationStatus)
             swal("ALERT","Succesful Login","success")
@@ -86,6 +86,7 @@ const UserFormsAuth =()=>{
              if(message.message=="User Not Activated"){
               swal('ALERT',message.message, 'error');
               localStorage.setItem("email",formData.email)
+           
               window.location.href="/verify-message" 
             }
             else{
@@ -159,7 +160,7 @@ const UserFormsAuth =()=>{
 
 
                 </LabelInput>
-                <p>Don't have an account ? <Link style={{color:"blue"}} to="/signup">Sign up here</Link></p>
+                <p> {"Don't have an account"} ? <Link style={{color:"blue"}} to="/signup">Sign up here</Link></p>
 
                 </Form>
 

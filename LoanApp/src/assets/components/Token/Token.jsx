@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import swal from 'sweetalert';
+
 import { PORT, loader, activeIcon, inact } from '../../Utils/AppUtils';
 import { Preloader, ImgLoader, BodyToken, Modar,ButtonEmail } from '../Styled/Styled';
 import { useLocation } from 'react-router-dom';
@@ -10,7 +10,9 @@ const Token = () => {
   const queryParams = new URLSearchParams(location.search);
   const token = queryParams.get('token');
 
-  const email = localStorage.getItem('email');
+  const email = localStorage.getItem("email")
+
+
 
   useEffect(() => {
     const fun = async () => {

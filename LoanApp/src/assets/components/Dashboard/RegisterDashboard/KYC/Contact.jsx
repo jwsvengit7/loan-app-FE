@@ -1,5 +1,6 @@
-import React, { useState,useEffect } from 'react';
-import { useParams,Link } from 'react-router-dom';
+import  { useState, useEffect } from 'react';
+import { useParams,Link ,useNavigate} from 'react-router-dom';
+
 import Header from '../../../Header/Header';
 import ContactInfo from './ContactInfo';
 import { Flex, SideDiv, Body } from '../../../Styled/Styled';
@@ -16,15 +17,17 @@ import {
   ButtonForm,
   UPLOAD,
   MessageResponse,
-
   UploadImg,
   PreloaderImage,
 } from '../../RegisterDashboard/Styled-dashboard';
 import axios from 'axios';
-
-import fileshield from '../images/file-shield-alt.png'
+import fileshield from '../images/file-shield-alt.png';
+import { config ,TOKEN} from '../../../../Utils/AppUtils';
+import { fetchContactInfo } from '../../../../Utils/UserUtils';
 
 const Contact = () => {
+  const navigate = useNavigate();
+ 
     const { id } = useParams();
     const [count,setCount] = useState(1);
     const [image,setImage] =useState(null);
@@ -33,42 +36,42 @@ const Contact = () => {
     const [firstName,setFirstname]= useState("");
     const [lastName,setLastname]= useState("");
     const [email,setEmail]= useState("");
-    const [number,setNumber]= useState(0);
+    const [number,setNumber]= useState(null);
     const [loading,setLoading]= useState(false);
-    const [loading3,setLoading3]= useState(false);
+    // const [loading3,setLoading3]= useState(false);
 
+
+    useEffect(() => {
+      fetchContactInfo(location,config);
+    }, []);
+  
+  
     const [document,setDocs] = useState({
       documentType:"",
       documentNumber:""
 
     })
 
+
     const [banks, setBanks] = useState([]);
     const [bankName, setBankName] = useState("");
     const [accountNumber, setAccountNumber] = useState("");
     const [accountName,setAccountName] = useState("")
-    const [loading2x,set2x] =useState(false)
-    const [loading2x3,set2x3] =useState(false)
+
   
-   const TOKEN = localStorage.getItem("TOKEN");
-   
+    const TOKEN = localStorage.getItem("TOKEN");
+    
+      
+
    console.log(TOKEN)
 
    useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const TOKEN = localStorage.getItem('TOKEN');
+      
         const url = 'http://localhost:8083/api/profile/getDetails';
-        const headers = {
-          Authorization: `Bearer ${TOKEN}`,
-          'Content-Type': 'application/json',
-        };
-
-        const response = await fetch(url, {
-          method: 'GET',
-          headers: headers,
-        });
-
+    
+        const response = await fetch(url, config);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -89,7 +92,11 @@ const Contact = () => {
 
 
   function save(event) {
+    console.log(event)
  
+  }
+  function dashboard(){
+    window.location.href="http://localhost:5173/dashboard"
   }
 
   function next(){
@@ -99,10 +106,10 @@ const Contact = () => {
   function checkType() {
  
     return (
-      firstName !== '' && 
-      lastName !== '' &&
-      email !== '' &&
-      number !== ''
+      firstName !== '' || firstName!==null && 
+      lastName !== ''  || lastName!==null &&
+      email !== ''  || email!==null &&
+      number !== ''  || number!==null
     );
   }
 
@@ -122,20 +129,17 @@ const Contact = () => {
      
           console.log(formdata)
           const url = "http://localhost:8083/api/profile/contact-information";
-          const config = {
-            headers: {
-              Authorization: `Bearer ${TOKEN}`,
-              'Content-Type': 'application/json', 
-            },
-          };
+
       
           axios.put(url, formdata, config)
             .then((response) => {
               setLoading(false)
               console.log(response);
-              if(response.data.data=="success"){
+              if(response.data.data.status!=null){
                 set2x(true)
-
+               
+                navigate("/kyc/2");
+                
               }
             })
             .catch((error) => {
@@ -167,7 +171,7 @@ const Contact = () => {
     
         documentType:document.documentType,
         documentNumber:document.documentNumber,
-        url:selectedFile
+        url:image
 
       }
      
@@ -180,7 +184,7 @@ const Contact = () => {
             },
             params:{
               governmentIDDTO:document,
-              file:selectedFile
+              file:image
             }
           };
       
@@ -212,10 +216,8 @@ const Contact = () => {
         console.log(response.data.data);
         setBanks(response.data.data);
       });
- 
 
   }, []);
-
 
   return (
     <>
@@ -227,14 +229,12 @@ const Contact = () => {
         <Body>
           <Info>
             {(id==1)?
-            
         <>
             <h1>Contact Information</h1>
          
             <InfoContainers onSubmit={(e) => {
                e.preventDefault(); 
               
-               
                 contact(
                 {
                   firstName:firstName,
@@ -291,7 +291,7 @@ const Contact = () => {
               <ContentButton>
                 {/* <Button onClick={next} type="button">Continue</Button> */}
                 <p>{(loading)? "Loading ..... " : ""}</p>&nbsp;&nbsp;&nbsp;&nbsp;
-             {(!loading2x) ?  <Button>Save</Button> :<Link to={`../kyc/`+2}><Button type="button">Next</Button></Link> }
+          <Button>Next</Button>
               </ContentButton>
             </InfoContainers>
 
@@ -348,7 +348,7 @@ const Contact = () => {
                       type="text"
                       name="name"
                     
-                      onChange={(e) => setFormdata({ ...formdata, name: e.target.value })}
+                      onChange={(e) => setFormdata({ ...formData, name: e.target.value })}
                       >
                         <option>Remote</option>
                         <option>Hybrid</option>
@@ -636,7 +636,7 @@ const Contact = () => {
                         }
                     }>Previous</Button></Link>&nbsp;&nbsp;
 
-                    <Button type="button" onClick={window.location.href="http://localhost:5173/dashboard"}>Submit</Button>
+                    <Button type="button" onClick={dashboard}>Submit</Button>
                   </ContentButton>
                 </InfoContainers>
     

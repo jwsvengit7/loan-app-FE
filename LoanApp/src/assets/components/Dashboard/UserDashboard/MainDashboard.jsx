@@ -7,22 +7,32 @@ import db from './Images/message-square-lines.png'
 import axios from 'axios'
 import reciept from './Images/receipt-alt.png'
 import { Button } from "../RegisterDashboard/Styled-dashboard";
+import { DivI,App,
+    DivIm, 
+    DivImp,
+    DivImp2,AppContent, 
+    LoanModar, RoleModar
+    ,RoleModar2,
+    FormI } from "./DashboardStyled";
+import { config } from "../../../Utils/AppUtils";
+
+
+
 
 const MainDashboard =()=>{
+
+    const [year,setYear] = useState(0)
+    const [month,setMonth] = useState(0)
+    const [day,setDay] = useState("")
     const [status,setStatus] = useState(false)
     const [loan,setLoan] = useState(false)
     const [loading, setLoading] = useState(false);
     const [state, setState] = useState(false);
     const [type, setButton] = useState("");
-    const TOKEN = localStorage.getItem("TOKEN");
-    console.log(TOKEN)
 
-    const config = {
-        headers: {
-          Authorization: `Bearer ${TOKEN}`,
-          'Content-Type': 'application/json', 
-        },
-      };
+
+
+
 
     const [confirmState, setConfirm] = useState(false);
     const [formData, setFormData] = useState({
@@ -31,13 +41,11 @@ const MainDashboard =()=>{
         purpose: "",
         interestRate: "",
         requiredDocuments: "",
-        
       });
 
     const loanIn =()=>{
         setLoan(true)
         setConfirm(false)
-
     }
 
     const goBack =()=>{
@@ -45,12 +53,6 @@ const MainDashboard =()=>{
         setConfirm(false)
 
     }
-
-
-    
-    
-    
-  
       const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData((prevFormData) => ({
@@ -61,7 +63,7 @@ const MainDashboard =()=>{
 
     const [createdAt,setCreated] = useState("")
     const [interestRate,setinterestRate] = useState("")
-    const [loanAmt,setloanAmt] = useState("")
+    const [loanAmt,setloanAmt] = useState(0)
     const [purpose,setpurpose] = useState("")
     const [repaymentTerm,setrepaymentTerm] = useState("")
     const [updatedAt,setupdatedAt] = useState("")
@@ -71,39 +73,32 @@ const MainDashboard =()=>{
 
 useEffect(()=>{
 
-    fetch("http://localhost:8085/api/loanApplication",config)
+    fetch("http://localhost:8084/api/loanApplication",config)
     .then(response=> response.json())
     .then((data)=>{
         console.log(data)
-        // if(data[0].)
         if(data.length>0){
             setState(true)
             setData(data)
             console.log(data[0])
-            console.log(data[0].loanAmt)
             setCreated(data[0].createdAt)
             setinterestRate(data[0].interestRate)
-            // setloanAmt(data[0].loanAmt)
-           
-            setloanAmt(data[0].loanAmt)
-
- 
-
-
-     
+            const loanAm = convert(data[0].loanAmt)
+            setloanAmt(loanAm)
             setpurpose(data[0].purpose)
             setrepaymentTerm(data[0].repaymentTerm)
             setupdatedAt(data[0].updatedAt)
             settotalRepayment(data[0].totalRepayment)
-
         }
     })
-
-
+    const dates = new Date();
+    setYear(dates.getFullYear())
+    setMonth(dates.getMonth())
+    const week = [
+        "Sunday",  "Monday",  "Tuesday",  "Wednessday",  "Thursday",  "Friday",  "Saturday"
+    ]
+    setDay(week[dates.getDay()])
 },[])
-    
-
-
 
 function convert(loanAmt){
     const nairaFormat = loanAmt.toLocaleString("en-NG", {
@@ -117,7 +112,7 @@ function convert(loanAmt){
       console.log(reducedFloat);
 
      
-      return  setloanAmt(convert(loanAmt));
+      return  reducedFloat;
 }
 // convert(loanAmt)
 
@@ -131,7 +126,7 @@ function convert(loanAmt){
         e.preventDefault()
 
 
-        const response = axios.post("http://localhost:8085/api/loanApplication/apply",{
+        const response = axios.post("http://localhost:8084/api/loanApplication/apply",{
             loanAmt:formData.loanAmt,
             interestRate:formData.interestRate,
             repaymentTerm:12,
@@ -159,12 +154,11 @@ function convert(loanAmt){
             <SidebarD />
             <App>
                 <h1>Welcome to the dashboard</h1>
-            <p>Wednessday May 31,2023</p>
+            <p>{day} {month} ,{year}</p>
          
            
            {(state) ?
-           <DivI
-           >
+           <DivI>
             <DivImp>
                 <h2>Total Amount Borrowed</h2>
                 <h1 style={{color:"#222",fontSize:"30px"}}><strike style={{color:"#222",fontSize:"30px"}}>N</strike>{loanAmt}</h1>
@@ -270,16 +264,9 @@ function convert(loanAmt){
 
                     <Button onClick={confirm}>Continue</Button>
                     </FormI>
-
-
-                    
                 </Modar>
-
-
-             
             </LoanModar>
 
-          
             
             </>
             :""
@@ -335,105 +322,3 @@ function convert(loanAmt){
 export default MainDashboard;
 
 
-const App =styled.div`
-width:80%;
-height:auto;
-overflow:scroll;
-background:#f8f8f8;
-padding:20px
-`
-
-const DivIm =styled.div`
-width:100%;
-height:150px;
-img{
-    width:90%;
-    height:100%
-}
-`
-
-const AppContent =styled.div`
-width:90%;
-height:300px;
-margin-top:30px;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center
-
-`
-
-const LoanModar = styled.div`
-width:100%;
-height:100vh;
-position:fixed;
-z-index:999;
-top:0px;
-background:rgba(0,0,0,0.5);
-display:flex;
-justify-content:center;
-align-items:center
-`
-
-const RoleModar =styled.div`
-width:100%;
-height:40px;
-boder-bottom:1px solid #ccc;
-display:flex;
-justify-content:space-between;
-align-items:center;
-button{
-    width:20px;
-    height:20px;
-    border-radius:40px;
-    font-size:10px;
-    border:0px;
-}
-`
-const RoleModar2 =styled.div`
-width:100%;
-height:auto;
-boder-bottom:1px solid #ccc;
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-direction:column
-
-`
-const FormI =styled.form`
-width:100%;
-label{
-    margin:top:10px
-}
-
-`
-
-const DivI =styled.div`
-
-width:100%;
-height:auto;
-padding:10px;
-background:white;
-display:flex;
-`
-const DivImp = styled.div`
-width:300px;
-height:150px;
-border-radius:10px;
-border:1px solid #ccc;
-margin:10px;
-padding:20px
-`
-
-const DivImp2 = styled.div`
-width:300px;
-height:150px;
-border-radius:10px;
-border:1px solid #ccc;
-margin:10px;
-padding:20px;
-p{
-    margin:0px;
-    font-size:12px
-}
-`

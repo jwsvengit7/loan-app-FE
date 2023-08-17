@@ -171,8 +171,6 @@ img{
 export const SplashBox =styled.div`
 width: 100px;
 height: 100px;
-
-
 background: rgba(45, 0, 247, 0.1);
 border-radius:100px;
 position:relative;
@@ -317,7 +315,7 @@ flex-wrap:wrap
 export const ALLBox =styled.div`
 width:400px;
 height:100px;
-background:#003366;
+background: rgba(45, 0, 247, 1);
 align-items:center;
 justify-content:space-around;
 display:flex;
@@ -471,7 +469,8 @@ align-items:center
 
 export const Flex =styled.div`
 width:100%;
-height:auto;
+height:85vh;
+overflow:scroll;
 
 display:flex
 `
@@ -566,4 +565,83 @@ border-radius:20px;
 background:#2D00F7;
 color:white;
 border:0px
+`
+
+export const Testimonies =styled.div`
+width:95%;
+height:450px;
+overflow:scroll;
+display:flex;
+align-items:center;
+p{
+    color:grey;
+    text-align:left;
+    font-size:13px
+
+}
+h4,h5{
+    margin:0px;
+    margin-top:50px
+}
+`
+
+export const TestiBox =styled.div`
+width:280px;
+height:80%;
+padding:20px;
+margin:30px;
+box-shaddow:0px 2px 2px 1px #ccc;
+background:white;
+border-left:10px solid #1E1984;
+box-shadow: 0px 4px 8px 0px #00000014;
+
+
+
+`
+export const ImageTesti =styled.div`
+width:50px;
+height:50px;
+border-radius:200px;
+margin:10px;
+
+`
+
+export const ImgInRound =styled.img`
+width:100%;
+height:100%;
+border-radius:200px;
+`
+export const TestimoniesOverLay =styled.div`
+width:300%;
+align-items:center;
+height:auto;
+display:flex
+`
+
+export const BlueIvContainer =styled.div`
+width:18%;
+height:250px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+
+margin:5px;
+
+`
+
+export const BlueIv =styled.div`
+width:100%;
+height:300px;
+display:flex;
+align-items:center;
+justify-content:center;
+h1{
+    font-size:40px;
+    color:white;
+    margin:0px;
+}
+p{
+    font-size:20px;
+    color:white
+}
 `

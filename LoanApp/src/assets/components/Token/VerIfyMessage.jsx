@@ -1,10 +1,10 @@
 
 
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import swal from 'sweetalert';
+import {  useState } from 'react';
 
-import {sms,activeIcon,loader,PORT} from '../../Utils/AppUtils'
+
+import {sms,loader,PORT} from '../../Utils/AppUtils'
 import { Preloader,ImgLoader,ButtonEmail,BodyToken,Modar} from '../Styled/Styled';
 import { useLocation } from 'react-router-dom';
 
@@ -14,6 +14,7 @@ const VerifyMessage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const message = queryParams.get('message-auth');
+
 
 
   const email = localStorage.getItem('email');
@@ -52,7 +53,8 @@ const VerifyMessage = () => {
         setMainMessage("Try again or check verification Link");
       });
 
-  }
+  
+}
 
 
 return (

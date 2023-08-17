@@ -4,12 +4,10 @@ import icon1 from '../images/icon (1).png'
 import icon2 from '../images/icon (2).png'
 import icon3 from '../images/icon (3).png'
 import icon4 from '../images/icon (4).png'
-import Information from "../KYC/Information";
-import { Button, ButtonForm, ContentButton } from "../Styled-dashboard";
+import { Button, ContentButton } from "../Styled-dashboard";
 import { Link } from "react-router-dom";
 const MainBody =()=>{
  
-
     return(
         <>
         <Body>
