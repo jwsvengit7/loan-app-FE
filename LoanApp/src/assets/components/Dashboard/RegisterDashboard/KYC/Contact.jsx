@@ -22,7 +22,7 @@ import {
 } from '../../RegisterDashboard/Styled-dashboard';
 import axios from 'axios';
 import fileshield from '../images/file-shield-alt.png';
-import { config ,TOKEN} from '../../../../Utils/AppUtils';
+import { config } from '../../../../Utils/AppUtils';
 import { fetchContactInfo } from '../../../../Utils/UserUtils';
 
 const Contact = () => {
@@ -38,7 +38,9 @@ const Contact = () => {
     const [email,setEmail]= useState("");
     const [number,setNumber]= useState(null);
     const [loading,setLoading]= useState(false);
-    // const [loading3,setLoading3]= useState(false);
+    const [loading3,setLoading3]= useState(false);set2x
+    const [zy3,set2x3]=useState(false)
+      const [zy2,set2x]=useState(false)
 
 
     useEffect(() => {
@@ -99,9 +101,7 @@ const Contact = () => {
     window.location.href="http://localhost:5173/dashboard"
   }
 
-  function next(){
-    setCount(count+1)
-  }
+
 
   function checkType() {
  
@@ -208,7 +208,8 @@ const Contact = () => {
 
   }
 
- 
+
+  
   
   useEffect(() => {
     axios.get("https://api.paystack.co/bank")
