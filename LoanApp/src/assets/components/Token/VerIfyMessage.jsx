@@ -14,6 +14,7 @@ const VerifyMessage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const message = queryParams.get('message-auth');
+  console.log(message)
 
 
 
