@@ -150,7 +150,7 @@ const UserFormsAuth =()=>{
                        
                         ></Input>
                     </LabelI>
-                    <Link to="" >
+                    <Link to="/reset" >
                         Forget password
                     </Link>
                    <p></p>
