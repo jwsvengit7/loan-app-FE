@@ -45,7 +45,7 @@ const Lending = ()=>{
                 </Layout1>
                 <span>&nbsp;Micheal John</span>
                 <Layout1>
-                    <span style={{width:"60%"}}>Lpariatur  fugit saepe dolorem obcaecati autem dolore reprehenderit quia alias sapiente. Sapiente, labore.</span>
+                    <span style={{width:"60%"}}>pariatur fugit saepe dolorem obcaecati autem dolore reprehenderit quia alias sapiente. Sapiente, labore.</span>
 
      <Button style={{background:"white",color:"black",border:"1px solid #ccc"}}>Message <FaAddressCard /></Button>
                 </Layout1>
