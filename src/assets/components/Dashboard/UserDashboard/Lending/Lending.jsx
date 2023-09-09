@@ -56,7 +56,7 @@ const Lending = ()=>{
                    <ButtonLoan>90days Repayment</ButtonLoan>
                    </Buxrate>
 
-  
+
                 </Layout1>
                 </Layout>
                 <Layout>

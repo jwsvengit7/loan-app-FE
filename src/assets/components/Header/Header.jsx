@@ -1,4 +1,4 @@
-import { Headers ,LogoDiv,H1, PerfectLine, Img} from "../Styled/Styled";
+import { Headers,LogoDiv,H1,PerfectLine,Img} from "../Styled/Styled";
 import NavBar from './NavBar'
 import logo from "../Images/logo_.png"
 import {useState,useEffect} from 'react'
